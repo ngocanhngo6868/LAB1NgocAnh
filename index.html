@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngọc Ánh Studio - Thuê Đồ & Phụ Kiện Chụp Hình</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Banner khuyến mãi chạy -->
+    <div class="promo-banner">
+        <div class="promo-track">
+            <span><i class="fas fa-gift"></i> ƯU ĐÃI ĐẶC BIỆT: Giảm ngay 50% tổng hóa đơn khi khách hàng thuê từ 3 bộ trang phục trở lên!</span>
+            <span><i class="fas fa-camera-retro"></i> Tặng kèm phụ kiện chụp hình miễn phí khi check-in tại Studio!</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        
+        <div class="logo"><i class="fas fa-camera-retro"></i> Ngọc Ánh Studio</div>
+        
+        <nav id="main-nav">
+            <ul>
+                <li><a href="javascript:void(0)" class="nav-btn active" onclick="showPage('home', this)">Trang chủ</a></li>
+                <li><a href="javascript:void(0)" class="nav-btn" onclick="showPage('party', this)">Dự tiệc</a></li>
+                <li><a href="javascript:void(0)" class="nav-btn" onclick="showPage('aodai', this)">Áo dài</a></li>
+                <li><a href="javascript:void(0)" class="nav-btn" onclick="showPage('lolita', this)">Lolita & Anime</a></li>
+                <li><a href="javascript:void(0)" class="nav-btn" onclick="showPage('accessories', this)">Phụ kiện</a></li>
+                <li><a href="javascript:void(0)" class="nav-btn" onclick="showPage('rules', this)">Quy định</a></li>
+                <li><a href="javascript:void(0)" class="nav-btn" onclick="showPage('orders-section', this)">Quản lý đơn</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <select id="sort-select" onchange="searchAndSortProducts()">
+                <option value="default">Mặc định</option>
+                <option value="asc">Giá: Thấp đến Cao</option>
+                <option value="desc">Giá: Cao đến Thấp</option>
+            </select>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Tìm đồ..." onkeyup="searchAndSortProducts()">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- TRANG CHỦ -->
+    <section id="home" class="page-section active-page">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Tỏa Sáng Trong Từng Khung Hình</h1>
+                <p>Cho thuê trang phục dự tiệc, áo dài, Lolita/Cosplay và các phụ kiện studio chuyên nghiệp.</p>
+                <a href="javascript:void(0)" onclick="showPage('party', document.querySelectorAll('.nav-btn')[1])" class="btn-primary">Khám phá ngay</a>
+            </div>
+        </section>
+    </section>
+
+    <!-- TRANG DỰ TIỆC -->
+    <section id="party" class="page-section products-section">
+        <h2>Trang Phục Dự Tiệc Hội</h2>
+        <div class="product-grid" id="party-list"></div>
+    </section>
+
+    <!-- TRANG ÁO DÀI -->
+    <section id="aodai" class="page-section products-section" style="background-color: #f7f3ee;">
+        <h2>Bộ Sưu Tập Áo Dài</h2>
+        <div class="product-grid" id="aodai-list"></div>
+    </section>
+
+    <!-- TRANG LOLITA & ANIME -->
+    <section id="lolita" class="page-section products-section" style="background-color: #fff0f3;">
+        <h2>Trang Phục Lolita & Cosplay Anime</h2>
+        <div class="product-grid" id="lolita-list"></div>
+    </section>
+
+    <!-- TRANG PHỤ KIỆN -->
+    <section id="accessories" class="page-section products-section">
+        <h2>Phụ Kiện Chụp Hình & Studio</h2>
+        <div class="product-grid" id="accessories-list"></div>
+    </section>
+
+    <!-- TRANG QUY ĐỊNH -->
+    <section id="rules" class="page-section rules-section">
+        <h2>Quy Định Cho Thuê Studio</h2>
+        <div class="rules-grid">
+            <div class="rule-card"><i class="fas fa-hand-holding-usd"></i><h3>1. Đặt cọc & Giữ đồ</h3><p>Khách hàng đặt cọc trước 50% để giữ đồ. Thanh toán phần còn lại khi nhận đồ.</p></div>
+            <div class="rule-card"><i class="fas fa-id-card"></i><h3>2. Cọc thế chấp</h3><p>Thế chân tiền mặt HOẶC để lại giấy tờ tùy thân gốc (CCCD, Hộ chiếu, Cà vẹt xe).</p></div>
+            <div class="rule-card"><i class="fas fa-clock"></i><h3>3. Phí quá hạn</h3><p>Phụ thu từ 10% đến 30% giá trị đơn/ngày trả trễ. Không báo trước có thể mất cọc.</p></div>
+            <div class="rule-card"><i class="fas fa-shield-alt"></i><h3>4. Bảo quản</h3><p>Tuyệt đối không tự ý cắt xén, dán keo. Hư hỏng sẽ đền bù theo chi phí thực tế.</p></div>
+        </div>
+    </section>
+
+    <!-- TRANG QUẢN LÝ ĐƠN -->
+    <section id="orders-section" class="page-section orders-section">
+        <h2>Quản Lý Đơn Thuê & Trả Đồ</h2>
+        <div class="orders-container" id="orders-container">
+            <p class="no-order">Chưa có đơn thuê nào được tạo.</p>
+        </div>
+    </section>
+
+    <!-- Giỏ hàng Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Danh sách đồ thuê</h3>
+            <button onclick="toggleCart()" class="close-cart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="total"><span>Tổng phí thuê:</span><span id="cart-total">0đ / ngày</span></div>
+            <button class="btn-checkout" onclick="openCheckoutModal()">Tiến hành chốt đơn</button>
+        </div>
+    </div>
+
+    <!-- Modal Checkout -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Thông Tin Người Thuê</h3>
+                <button onclick="closeCheckoutModal()" class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"><label>Họ và tên</label><input type="text" id="renter-name" placeholder="VD: Ngô Thị Ngọc Ánh"></div>
+                <div class="form-group"><label>Số điện thoại</label><input type="text" id="renter-phone" placeholder="Nhập chuẩn 10 số (VD: 0987654321)"></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Ngày nhận đồ</label><input type="date" id="renter-date"></div>
+                    <div class="form-group"><label>Giờ nhận đồ</label><input type="time" id="renter-time"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Số ngày thuê</label><input type="number" id="renter-days" min="1" value="1" oninput="calculateModalTotal()"></div>
+                    <div class="form-group"><label>Giảm giá (%)</label><input type="number" id="discount-percent" min="0" max="100" value="0" oninput="calculateModalTotal()"></div>
+                </div>
+                <div class="form-group">
+                    <label>Hình thức thế chân (Cọc)</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="deposit-type" value="Tiền mặt/Chuyển khoản tương đương giá trị" checked> Cọc tiền / Chuyển khoản</label>
+                        <label><input type="radio" name="deposit-type" value="Giấy tờ tùy thân gốc (CCCD/Hộ chiếu/Cà vẹt)"> Giữ CCCD / Cà vẹt xe</label>
+                    </div>
+                </div>
+                <div class="modal-total"><span>Thành tiền:</span><span id="modal-total-price">0đ</span></div>
+                <button class="btn-confirm-order" onclick="submitOrder()">Chốt đơn & Ghi nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast & Back To Top -->
+    <div id="toast" class="toast">Thành công!</div>
+    <button id="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+    <footer><p>&copy; 2026 Ngọc Ánh Studio - Dịch vụ cho thuê trang phục & phụ kiện chụp hình chuyên nghiệp cảm ơn quý khách đã trao trọn niềm tin vào shop.</p></footer>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
